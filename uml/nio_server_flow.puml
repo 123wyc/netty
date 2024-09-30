@@ -1,0 +1,36 @@
+@startuml
+title NIO服务端序列图
+autonumber "<b>0."
+
+participant "NIO服务端" as nio_server
+
+participant "Reactor Thread" as reactorThread
+
+participant "IoHandler" as ioHandler
+
+
+
+nio_server->reactorThread: 打开 ServerSocketChannel
+
+nio_server->reactorThread: 绑定监听地址 InetSocketAddress
+
+reactorThread-> ioHandler: 创建 Selector,启动线程
+
+nio_server->reactorThread: 将serverSocketChannel注册到selector上, 监听accept事件
+
+reactorThread->ioHandler: Selector 轮询就绪的key,获取channel集合
+
+ioHandler-> reactorThread: handleAccept() 处理新的客户端接入
+
+ioHandler->ioHandler: 设置新建客户端链接的socket参数
+
+ioHandler->reactorThread: 向selector注册监听读操作的SelectionKey.OP_READ
+
+reactorThread->ioHandler: handleRead()异步读请求消息到缓存ByteBuffer
+
+ioHandler->ioHandler: decode 请求消息
+
+ioHandler->reactorThread:  异步写byteBuffer到socketChannel
+
+
+@enduml
