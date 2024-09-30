@@ -1,0 +1,26 @@
+# Idea的配置目录
+.idea/
+
+# 编译输出目录
+out/
+
+# Maven的target目录
+target/
+
+# 已编译的class文件
+*.class
+
+# 项目日志文件
+*.log
+
+# Mac OS文件系统相关的文件
+.DS_Store
+
+
+# IntelliJ IDEA配置文件
+*.iml
+
+
+# Maven插件目录
+/.mvn
+
