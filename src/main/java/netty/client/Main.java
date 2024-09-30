@@ -15,7 +15,8 @@ public class Main {
             }
 
         }
-
-        new TimeClient().connect(port, "127.0.0.1");
+       // new TimeClient().connect(port, "127.0.0.1");
+       // new EchoClient().connect(port, "127.0.0.1");
+        new EchoClient_MsgPack("127.0.0.1", port,10).run();
     }
 }
